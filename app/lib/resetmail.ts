@@ -38,13 +38,19 @@ export default async function resetMail(email: string) {
 
         console.log(info);
 
-    } 
+      return { status: true, message: 'Email sent successfully!' }
 
-    return { status: true, message: 'Email sent successfully!' }
+    } else {
+
+      console.error(email, "this mail is not registered");
+
+      return { status: true, message: "This Email isn't registerd!" }
+
+    }
 
   } catch (error) {
     
-    console.log(error);
+    console.error(error,"error sending reset mail");
     
     return { status: false, message: 'Error sending email please try again!' }
   

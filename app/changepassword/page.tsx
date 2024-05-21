@@ -3,6 +3,7 @@ import { Suspense, useState } from "react";
 import { PasswordCheck } from "../lib/definitions";
 import axios from "axios";
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from "next/link";
 
 function Changepassword() {
   const router = useRouter();
@@ -102,6 +103,7 @@ function Changepassword() {
           value="Change Password"
           aria-disabled={pending}
         />
+        <Link href="/login">Don&apos;t want to change password</Link>
 
       </fieldset>
   </form>

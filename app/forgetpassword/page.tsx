@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 export default function Forgotpassword() {
   
@@ -52,6 +53,13 @@ export default function Forgotpassword() {
             value="Reset password"
             aria-disabled={pending}
         />
+        
+        <div className="grid">
+          <Link href="/login">Try to Login</Link>
+          <Link href="/register">Try to Register</Link>
+        </div>
+
+
       </fieldset>
   </form>
   );

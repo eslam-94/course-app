@@ -97,7 +97,9 @@ export default function Register() {
             type="submit"
             value="Register"
             aria-disabled={pending}
-            />
+        />
+        <Link href="/login">Already have a user? Go to login</Link>
+            
       </fieldset>
     </form>
     }
