@@ -37,7 +37,7 @@ export default function Login() {
 
         <div className="grid">
           <Link href="/forgetpassword">Forgot password</Link>
-          <Link href="/register">Don&apos;t have account ?</Link>
+          <Link href="/register">Don&apos;t have account</Link>
         </div>
 
       </fieldset>
