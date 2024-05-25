@@ -53,7 +53,7 @@ h1,h2,p {
   background-color: #f2c3ca;
   position: fixed;
   top: 125px;
-  left: -300px;  
+  left: -300px;
   transition: left 1.5s ease-in-out;
 }
 

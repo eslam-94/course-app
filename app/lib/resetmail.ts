@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-import { generateToken, getUser, registerUser } from "./actions";
+import { generateToken } from "./actions";
+import { getFireUser } from "./firestoredb";
 
 export default async function resetMail(email: string) {
   
@@ -30,7 +31,7 @@ export default async function resetMail(email: string) {
   
   try {
 
-    const user = await getUser(email);
+    const user = await getFireUser(email);
         
     if (user) {
         

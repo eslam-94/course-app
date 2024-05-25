@@ -21,3 +21,12 @@ export type PasswordCheck = {
   password2: string ;
   token: string | null;
 }
+
+export type FireUser = {
+  email: string;
+  password: string;
+  name: string;
+  lessonIndex: number;
+  occupation: string;
+  company: string;
+}

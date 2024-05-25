@@ -2,10 +2,9 @@
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { User } from './definitions';
-import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers';
 
 const { db } = require('@vercel/postgres');
 
@@ -14,7 +13,9 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
+    
     await signIn('credentials', formData);
+
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -26,11 +27,7 @@ export async function authenticate(
     }
     throw error;
   }
-}/**
-UPDATE users
-SET password = '10'
-WHERE email= 'eslam.egy.94+eso@gmail.com';
-*/
+}
 
 export async function updateUserPass(email: string, password: string) {
   const client = await db.connect();
@@ -54,7 +51,7 @@ export async function updateUserPass(email: string, password: string) {
     await client.end()
   }
 }
-
+/*
 export async function registerUser(user: User) {
   const client = await db.connect();
   try {
@@ -77,18 +74,7 @@ export async function registerUser(user: User) {
     await client.end()
   }
 }
-
-
-export async function getUser(email: string): Promise<User | undefined> {
-  try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
-  } catch (error) {
-    console.log('Failed to fetch user');
-  }
-}
-
-
+*/
 export async function generateToken(userEmail: string) {
 
   const payload = { userEmail }; // Add user ID or other relevant data
@@ -99,3 +85,8 @@ export async function generateToken(userEmail: string) {
 
   return token;
 }
+
+
+export const getAccessToken = async (token: string) => {
+  cookies().set("access-token", token); // Expires in 1 hour
+};

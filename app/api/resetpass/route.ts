@@ -1,4 +1,4 @@
-import { updateUserPass } from "@/app/lib/actions";
+import { updateFireUserPass } from "@/app/lib/firestore";
 import resetMail from "@/app/lib/resetmail"
 import jwt from 'jsonwebtoken';
 
@@ -29,7 +29,7 @@ export async function PUT(request: Request) {
 
             const decoded = jwt.verify(token, process.env.AUTH_SECRET!!) as JwtPayload
 
-            const updatePass = await updateUserPass(decoded.userEmail, password1)
+            const updatePass = await updateFireUserPass(decoded.userEmail, password1)
 
 
         } catch(err) {

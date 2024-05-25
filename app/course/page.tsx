@@ -1,11 +1,11 @@
-import Sidebar from "../ui/sidebar";
 import Image from "next/image";
-import Logout from "../ui/logout";
 
 export default function Course() {
+
+
+  
     return (
       <>
-      <Logout/>
       <main className="container">
         <hgroup>
           <div>
@@ -20,11 +20,6 @@ export default function Course() {
           </div>
           <Image src="/placeHolder.png" alt="image-bot" width={300} height={300}/>    
         </hgroup>
-        <div className="grid navigate">
-          <button>PREVIOUS LESSON</button>
-          <button>NEXT LESSON</button>
-        </div>
-        <Sidebar/>  
       </main>
       </>
     );

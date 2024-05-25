@@ -1,7 +1,8 @@
 import nodemailer from "nodemailer";
 import { RegisterData } from "./definitions";
 import generator from 'generate-password'
-import { getUser, registerUser } from "./actions";
+import { getFireUser, registerFireUser } from "./firestoredb";
+
 
 export default async function registerMail(form: RegisterData) {
   
@@ -36,16 +37,18 @@ export default async function registerMail(form: RegisterData) {
   
   try {
 
-    const user = await getUser(form.email);
+    const user = await getFireUser(form.email);
     
     if (user) return { status: false, message: 'This Email is registered try to login!' };
         
     //todo add user to database
-    const saveUser = await registerUser({
-      id: "",
+    const saveUser = await registerFireUser({
       name: form.userName,
       password: password,
-      email: form.email
+      email: form.email,
+      lessonIndex: 0,
+      occupation: form.occupation,
+      company: form.company
     })
 
     if (!saveUser) return { status: false, message: 'Error registering user please try again!' };
