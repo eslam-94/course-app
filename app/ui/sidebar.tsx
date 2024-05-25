@@ -83,7 +83,7 @@ export default function Sidebar() {
                         
         </div>
         
-        <Script>
+        <Script id="siderbarjs">
             {
                 `
                 document.getElementById('arrow').addEventListener('click', () => {

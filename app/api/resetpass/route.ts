@@ -1,4 +1,4 @@
-import { updateFireUserPass } from "@/app/lib/firestore";
+import { updateFireUserPass } from "@/app/lib/firestoredb";
 import resetMail from "@/app/lib/resetmail"
 import jwt from 'jsonwebtoken';
 
