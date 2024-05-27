@@ -55,8 +55,8 @@ h1,h2,p {
   top: 125px;
   left: -300px;
   transition: left 1.5s ease-in-out;
-  max-height: 720px;
-  overflow-y: scroll;
+  max-height: 675px;
+  overflow-y: auto;
 }
 
 #arrow {
