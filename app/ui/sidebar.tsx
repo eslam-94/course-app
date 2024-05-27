@@ -13,7 +13,87 @@ interface SideList {
 }
 
 export default function Sidebar() {
-    const [lessons, setLessons] = useState<SideList[]>([])
+    const [lessons, setLessons] = useState<SideList[]>([
+        {
+          "lessonId": "lesson-1",
+          "isDone": true
+        },
+        {
+          "lessonId": "lesson-2",
+          "isDone": true
+        },
+        {
+          "lessonId": "lesson-3",
+          "isDone": true
+        },
+        {
+          "lessonId": "lesson-4",
+          "isDone": false
+        },
+        {
+          "lessonId": "lesson-5",
+          "isDone": false
+        },
+        {
+          "lessonId": "lesson-6",
+          "isDone": false
+        },
+        {
+          "lessonId": "lesson-7",
+          "isDone": true
+        },
+        {
+          "lessonId": "lesson-8",
+          "isDone": true
+        },
+        {
+          "lessonId": "lesson-9",
+          "isDone": false
+        },
+        {
+          "lessonId": "lesson-10",
+          "isDone": false
+        },{
+            "lessonId": "lesson-1",
+            "isDone": true
+          },
+          {
+            "lessonId": "lesson-2",
+            "isDone": true
+          },
+          {
+            "lessonId": "lesson-3",
+            "isDone": true
+          },
+          {
+            "lessonId": "lesson-4",
+            "isDone": false
+          },
+          {
+            "lessonId": "lesson-5",
+            "isDone": false
+          },
+          {
+            "lessonId": "lesson-6",
+            "isDone": false
+          },
+          {
+            "lessonId": "lesson-7",
+            "isDone": true
+          },
+          {
+            "lessonId": "lesson-8",
+            "isDone": true
+          },
+          {
+            "lessonId": "lesson-9",
+            "isDone": false
+          },
+          {
+            "lessonId": "lesson-10",
+            "isDone": false
+          }
+      ])
     const pathname = usePathname()
     const router = useRouter()
 
@@ -32,7 +112,7 @@ export default function Sidebar() {
                 setLessons(lessonArr)
             })
 
-            return () => unsubscribe()           
+            return () => unsubscribe()          
         }
     ,[])
 
@@ -65,6 +145,9 @@ export default function Sidebar() {
 
     return (
         <>
+        <div id="arrow" >
+            <ArrowRightCircleIcon/>
+        </div>
         <div id="sidebar">
         <h4>LESSONS:</h4>
             {
@@ -72,9 +155,7 @@ export default function Sidebar() {
             }
         </div>
         
-        <div id="arrow" >
-            <ArrowRightCircleIcon/>
-        </div>
+        
 
         <div className="grid navigate">
             { pathname !== '/course' && <button onClick={handlePrevious}>PREVIOUS LESSON</button> }
