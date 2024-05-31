@@ -1,5 +1,7 @@
 import type { NextAuthConfig } from 'next-auth';
- 
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken'
+
 export const authConfig = {
   pages: {
     signIn: '/login',
@@ -10,7 +12,8 @@ export const authConfig = {
       const isOnDashboard = nextUrl.pathname.startsWith('/course');
       const isOnLogIn = nextUrl.pathname.startsWith('/login');
       if (isOnDashboard) {
-        if (isLoggedIn) return true;
+        if (isLoggedIn) return true
+        
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn && isOnLogIn) {
         return Response.redirect(new URL('/course', nextUrl));
