@@ -32,7 +32,7 @@ export const { auth, signIn, signOut } = NextAuth({
               
                 const token = jwt.sign(payload, secret); // Set expiration time (optional)
 
-                cookies().set("user-token", token)
+                cookies().set("user-token", token, { secure: true })
                 
                 return user;
               }
