@@ -1,21 +1,21 @@
 import { getFireUser } from '@/app/lib/firestoredb'
 import { db } from '@/app/lib/firestoresetting'
-import { arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import { auth } from '@/auth'
+import { arrayRemove, arrayUnion, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore'
 import { STATUS_CODES } from 'http'
-import jwt, { JwtPayload } from 'jsonwebtoken'
-import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
 
     const { lessonId, fromBtn } = await request.json()
+
+    const session = await auth()
+
+    if (!session) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
     
     try {
         
-        const token = cookies().get('user-token')
-
-        const decoded = jwt.verify(token?.value!!, process.env.AUTH_SECRET!!) as JwtPayload
-
-        const q = query(collection(db, "users") , where('email', '==', decoded.email));
+        const q = query(collection(db, "users") , where('email', '==', session.user?.email));
 
         const querySnapshot = await getDocs(q);
 
@@ -55,21 +55,12 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-    
-    try {
-        
-        const token = cookies().get('user-token')
 
-        const decoded = jwt.verify(token?.value!!, process.env.AUTH_SECRET!!) as JwtPayload
+    const session = await auth()
 
-        const user = await getFireUser(decoded.email)
+    if (!session?.user?.email) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
 
-        return new Response(JSON.stringify({email: decoded.email, lessonsViewed: user?.lessonsViewed}))
+    const user = await getFireUser(session.user.email)
 
-    } catch (error) {
-
-        console.log(error);
-
-        return new Response(JSON.stringify("error getting user progress"))
-    }
+    return NextResponse.json({email: user?.email, lessonsViewed: user?.lessonsViewed})
 }
