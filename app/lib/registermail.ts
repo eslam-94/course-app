@@ -46,7 +46,7 @@ export default async function registerMail(form: RegisterData) {
       name: form.userName,
       password: password,
       email: form.email,
-      lessonIndex: 0,
+      lessonsViewed: [''],
       occupation: form.occupation,
       company: form.company
     })
