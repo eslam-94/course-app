@@ -4,6 +4,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { getFireUser } from './app/lib/firestoredb';
+import { cookies } from 'next/headers'
+import jwt from 'jsonwebtoken';
 
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
@@ -22,7 +24,18 @@ export const { auth, signIn, signOut } = NextAuth({
 
               const passwordsMatch = await bcrypt.compare(password, user.password);
  
-              if (passwordsMatch) return user;
+              if (passwordsMatch) {
+
+                const payload = { email }; // Add user ID or other relevant data
+
+                const secret = process.env.AUTH_SECRET!!// Store your secret key securely
+              
+                const token = jwt.sign(payload, secret); // Set expiration time (optional)
+
+                cookies().set("user-token", token)
+                
+                return user;
+              }
             }
 
             console.log('Invalid credentials');       

@@ -26,7 +26,7 @@ export type FireUser = {
   email: string;
   password: string;
   name: string;
-  lessonIndex: number;
+  lessonsViewed: string[];
   occupation: string;
   company: string;
 }

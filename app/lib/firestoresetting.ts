@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCJA1pZQKmr5G1wIOBb0ec7K4pirgECNX8",
-    authDomain: "course-app-75cab.firebaseapp.com",
-    projectId: "course-app-75cab",
-    storageBucket: "course-app-75cab.appspot.com",
-    messagingSenderId: "1052486149279",
-    appId: "1:1052486149279:web:04627db81f1406af5eeeaa"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
   };
   
   // Initialize Firebase

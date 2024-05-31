@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers'
 import { signOut } from "@/auth";
 
 export default function Logout() {
@@ -7,6 +8,7 @@ export default function Logout() {
         className="container"
         action={async () => {
             'use server';
+            cookies().delete('user-token')
             await signOut();
         }}
         >
