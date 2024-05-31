@@ -48,14 +48,13 @@ h1,h2,p {
 
 #sidebar {
   width: 300px;
-  min-height: 650px;
   padding: 15px;
   background-color: #f2c3ca;
   position: fixed;
   top: 125px;
   left: -300px;
   transition: left 1.5s ease-in-out;
-  max-height: 100vh;
+  max-height: 550px;
   overflow-y: auto;
 }
 
