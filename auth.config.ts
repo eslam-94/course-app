@@ -1,6 +1,4 @@
 import type { NextAuthConfig } from 'next-auth';
-import { cookies } from 'next/headers';
-import jwt from 'jsonwebtoken'
 
 export const authConfig = {
   pages: {
@@ -21,5 +19,8 @@ export const authConfig = {
       return true;
     },
   },
+ // session:{
+   // maxAge: 10
+  //},
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;

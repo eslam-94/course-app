@@ -69,8 +69,10 @@ export default function LessonPage({params}:{
 
     return (
         <>
-        <h1>lesson: {lesson?.name}</h1>
-        <div dangerouslySetInnerHTML={{ __html: lesson?.content }}/>  
+        <details open>
+            <summary style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}><h1>lesson: {lesson?.name}</h1></summary>
+            <div dangerouslySetInnerHTML={{ __html: lesson?.content }}/> 
+        </details>
         </>
     )
 }
