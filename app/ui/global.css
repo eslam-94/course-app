@@ -1,35 +1,8 @@
-:root {
-  color: white;
-}
-
-body {
-  background-color: black;
-  min-height: 100vh;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-hgroup {
-  margin: auto;
-  display: flex;
-  align-items: center;
-  max-width: 1000px;
-}
-
-p {
-  max-width: 800px;
-}
-
-hgroup img {
-  margin: auto;
-}
-
-h1,h2,p {
-  color: white !important;
+:root:not([data-theme=dark]), [data-theme=light] {
+  --pico-background-color: black;
+  --pico-h1-color: white;
+  --pico-h2-color: white;
+  --pico-color: white;
 }
 
 .navigate {

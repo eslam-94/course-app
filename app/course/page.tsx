@@ -7,7 +7,7 @@ export default function Course() {
     return (
       <>
       <main className="container">
-        <hgroup>
+        <hgroup style={{margin: 'auto', display: 'flex', alignItems: 'center', maxWidth: '1000px'}}>
           <div>
             <h1>Lesson Header</h1>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry

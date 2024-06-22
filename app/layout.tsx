@@ -1,7 +1,6 @@
+import '@picocss/pico';
 import '@/app/ui/global.css';
-import '@picocss/pico' 
 import Header from './ui/header';
-
 
 export default function RootLayout({
   children,
