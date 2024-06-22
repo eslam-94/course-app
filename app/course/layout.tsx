@@ -10,7 +10,7 @@ export default function CourseLayout({
     <>
     <Logout/>
       <main className="container">
-        <hgroup>
+        <hgroup style={{margin: 'auto', display: 'flex', alignItems: 'center', maxWidth: '1000px'}}>
           <div id="copy-content" style={{width: '100%'}}>
             {children}
           </div>
