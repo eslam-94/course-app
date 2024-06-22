@@ -1,13 +1,22 @@
 'use client'
 import { db } from "@/app/lib/firestoresetting";
+import Copybtn from "@/app/ui/copy";
 import axios from "axios";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
+
+interface Section {
+    title: string;
+    content: string;
+    codeSnippet: string;
+    video: string;
+}
 
 interface Lesson {
     content: string;
     index: number;
     name: string;
+    sections: Section[],
 }
 
 export default function LessonPage({params}:{
@@ -18,11 +27,7 @@ export default function LessonPage({params}:{
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const scrollContainerRef = useRef(null);
 
-    const [lesson, setLesson] = useState<Lesson>({
-        content: "",
-        index: 0,
-        name:"",
-    })
+    const [lesson, setLesson] = useState<Lesson>()
     
     useEffect(
         () => {
@@ -69,10 +74,38 @@ export default function LessonPage({params}:{
 
     return (
         <>
-        <details open>
-            <summary style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}><h1>lesson: {lesson?.name}</h1></summary>
-            <div dangerouslySetInnerHTML={{ __html: lesson?.content }}/> 
-        </details>
+        {
+            lesson?.sections.map( (item, i) => {
+                return (
+                    <details key={`s-${i}`}>
+                        <summary style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}><h2>{item.title}</h2></summary>
+                        {
+                            item.video &&
+
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                                <iframe src={item.video} width={560} height={315}  loading="lazy">loading video .....</iframe>
+                            </div>
+                        }
+
+                        <div style={{margin: '15px 0'}} dangerouslySetInnerHTML={{ __html: item.content }}/> 
+
+                        {
+                        item.codeSnippet &&
+
+                        <div style={{position: 'relative', margin: '15px 0'}}>
+                            <Copybtn codeSnippet={item.codeSnippet}/>                                
+                            <pre>
+                                <code>
+                                    {item.codeSnippet.replace(/\\n/g,'\n')}
+                                </code>
+                            </pre>
+                        </div>
+                        }
+                        
+                    </details>
+                )
+            })
+        }
         </>
     )
 }

@@ -1,10 +1,38 @@
 'use client'
-export default function Copybtn() {
+import Image from "next/image";
+import { useState } from "react";
+
+export default function Copybtn({
+    codeSnippet
+}:{
+    codeSnippet: string;
+}) {
+    const [toolTip, setToolTip] = useState("Copy")
+    const [url, setUrl] = useState("/clipboard.svg")
+    const [text] = useState(codeSnippet)
+
     const handleClick = () => {
-        console.log('click');
-        const copyContent = document.getElementById('copy-content')
-        navigator.clipboard.writeText(copyContent?.innerText!!)
+        navigator.clipboard.writeText(text.replace(/\\n/g,'\r\n'))
+        setUrl("/clipboard-check.svg")
+        setToolTip("Copied")
+
+        setTimeout(() => {
+            setToolTip("Copy")
+            setUrl("/clipboard.svg")
+        }, 1000);
     }
 
-    return <button onClick={handleClick}>Copy lesson</button>
+    return (
+        <>
+        <em style={{position: 'absolute', top: '10px', right: '10px', cursor: 'pointer'}} data-tooltip={toolTip} data-placement="left" >    
+            <Image
+            onClick={handleClick}
+            src={url} 
+            alt="clipboard-icon" 
+            width={25} 
+            height={25}
+            />
+        </em>
+        </>
+    )
 }
