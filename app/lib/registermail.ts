@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { RegisterData } from "./definitions";
 import generator from 'generate-password'
 import { getFireUser, registerFireUser } from "./firestoredb";
+import { z } from "zod";
 
 
 export default async function registerMail(form: RegisterData) {
@@ -36,6 +37,9 @@ export default async function registerMail(form: RegisterData) {
   };
   
   try {
+    // validate user input on server
+    const userEmail = z.string().email();
+    userEmail.parse(form.email);
 
     const user = await getFireUser(form.email);
     

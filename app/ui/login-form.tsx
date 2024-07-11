@@ -46,9 +46,7 @@ export default function Login() {
 }
 
 function LoginButton() {
-  
   const { pending } = useFormStatus();
-  
   return (
     <input
     type="submit"

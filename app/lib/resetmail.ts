@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { generateToken } from "./actions";
 import { getFireUser } from "./firestoredb";
+import { z } from "zod";
 
 export default async function resetMail(email: string) {
   
@@ -30,6 +31,9 @@ export default async function resetMail(email: string) {
   };
   
   try {
+    // validate user input on server
+    const userEmail = z.string().email();
+    userEmail.parse(email);
 
     const user = await getFireUser(email);
         
